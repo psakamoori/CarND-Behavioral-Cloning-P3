@@ -94,37 +94,36 @@ O/P Size = (Kernel Size - Width/height + 2 * Padding)/(Stride + 1)
 Keras automatically computes the output shape of the previous layer/
 
 | Layer                 | Kernel Size |  Stride | Features |  O/P Size  |
-|:---------------------:|:---------------------------------------------:|
-| Input                 | 160x320x3 RGB image                                     
-| Cropping              | Crop top 50 pixels and bottom 20 pixels; output shape = 90x320x3 |
-| Normalization         | Each new pixel value = old pixel value/255 - 0.5      |
 
-| Convolution 5x5       | 5x5  |  2x2 | 24 | 43x158x24  |
-| RELU                  |                               |
-| Convolution 5x5       | 5x5  | 2x2  | 36 | 20x77x36   |
-| RELU                  |                               |
-| Convolution 5x5       | 5x5  | 2x2  | 48 | 8x37x48    |
-| RELU                  |                               |
-| Convolution 5x5       | 3x3  | 1x1  | 64 | 6x35x64    |
-| RELU                  |                               |
-| Convolution 5x5       | 3x3  | 1x1  | 64 | 4x33x64    |
-| RELU                  |                               |
-| Flatten               | Input 4x33x64, output 8448    |
-| Fully connected       | Input 8448, output 100        |
-| Dropout               | Set units to zero with probability 0.5 |
-| Fully connected       | Input 100, output 50          |
-| Fully connected       | Input 50, output 10           |
-| Fully connected       | Input 10, output 1 (labels)   |
+* Input                 | 160x320x3 RGB image                                     
+* Cropping              | Crop top 50 pixels and bottom 20 pixels; output shape = 90x320x3 |
+* Normalization         | Each new pixel value = old pixel value/255 - 0.5      |
 
-If my layer size math is correct, it does seem like the first fully connected layer has a very large number of parameters
-(8448x100) and therefore might overfit.
-I added a dropout layer after the first fully connected layer to guard against this possibility.
+* Convolution 5x5       | 5x5  |  2x2 | 24 | 43x158x24  |
+* RELU                  |                               |
+* Convolution 5x5       | 5x5  | 2x2  | 36 | 20x77x36   |
+* RELU                  |                               |
+* Convolution 5x5       | 5x5  | 2x2  | 48 | 8x37x48    |
+* RELU                  |                               |
+* Convolution 5x5       | 3x3  | 1x1  | 64 | 6x35x64    |
+* RELU                  |                               |
+* Convolution 5x5       | 3x3  | 1x1  | 64 | 4x33x64    |
+* RELU                  |                               |
+* Flatten               | Input 4x33x64, output 8448    |
+* Fully connected       | Input 8448, output 100        |
+* Fully connected       | Input 100, output 50          |
+* Fully connected       | Input 50, output 10           |
+* Fully connected       | Input 10, output 1 (labels)   |
+
 
 #### 3. Creation of the Training Set & Training Process
 
 Started UCity windows_sim and collected 18,135 images from all camera sensors.
 
-[Data Collection]: ./images/data_collection.png
-[Cetner Sensor Image]: ./images/center_2018_03_18_12_07_38_947.jpg
-[Left Sensor Image]: ./images/left_2018_03_18_12_09_30_018.jpg.jpg
-[Right Sensor Image]: ./images/right_2018_03_18_12_11_08_656.jpg
+![Data Collection]: ./images/data_collection.png
+
+![Cetner Sensor Image]: ./images/center_2018_03_18_12_07_38_947.jpg
+![Left Sensor Image]: ./images/left_2018_03_18_12_09_30_018.jpg.jpg
+
+![Right Sensor Image]: ./images/right_2018_03_18_12_11_08_656.jpg
+
